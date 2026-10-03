@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.codeya.hotspot.monitor</groupId>
+        <artifactId>hotspot-monitor</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>plugin</artifactId>
+    <name>Hotspot Monitor IDEA Plugin</name>
+
+    <properties>
+        <!-- 指向本地 IntelliJ IDEA 2026.2 安装目录的 lib；换机器时改成自己 IDEA 的路径 -->
+        <idea.lib.dir>/Applications/IntelliJ IDEA 2.app/Contents/lib</idea.lib.dir>
+    </properties>
+
+    <dependencies>
+        <!-- 平台 API 全部来自本地 IDEA 的 lib（见 maven-compiler-plugin 的 additionalClasspathElements），
+             不声明任何第三方依赖 -->
+    </dependencies>
+
+    <build>
+        <finalName>hotspot-monitor</finalName>
+        <plugins>
+            <!-- 平台 API 来自本地 IDEA 的 lib；由于 javac 的 * 通配符在 maven-compiler-plugin
+                 拼接出的复合 classpath/-sourcepath 组合下不会展开，这里跳过默认编译，
+                 改由 antrun 在脚本内把 jar 列表显式展开后驱动 javac（无任何通配符依赖） -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <skipMain>true</skipMain>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>javac-idea-lib</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <mkdir dir="${project.build.outputDirectory}"/>
+                                <pathconvert property="idea.lib.cp" pathsep="${path.separator}">
+                                    <fileset dir="${idea.lib.dir}">
+                                        <include name="*.jar"/>
+                                    </fileset>
+                                </pathconvert>
+                                <javac srcdir="${project.basedir}/src/main/java"
+                                       destdir="${project.build.outputDirectory}"
+                                       encoding="UTF-8"
+                                       includeantruntime="false"
+                                       fork="true"
+                                       debug="true"
+                                       nowarn="true">
+                                    <classpath>
+                                        <pathelement path="${idea.lib.cp}"/>
+                                    </classpath>
+                                    <include name="**/*.java"/>
+                                </javac>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 插件 jar（内含 META-INF/plugin.xml + 图标） -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.1</version>
+            </plugin>
+
+            <!-- 分发 zip：hotspot-monitor/lib/hotspot-monitor.jar -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.7.1</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>src/assembly/dist.xml</descriptor>
+                    </descriptors>
+                    <appendAssemblyId>false</appendAssemblyId>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-dist</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

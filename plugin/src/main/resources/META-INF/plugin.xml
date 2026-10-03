@@ -1,0 +1,30 @@
+<idea-plugin>
+    <id>com.codeya.hotspot.monitor</id>
+    <name>Hotspot Monitor</name>
+    <version>1.0</version>
+    <vendor>codeya1024</vendor>
+    <description><![CDATA[
+        HTTP 请求卡点监控（类似 XRebel）：请求耗时分布 / SQL 慢查询 / 下游 HTTP 调用。
+        配合 hotspot-agent（-javaagent）使用：服务启动后在本工具窗口即可实时查看卡点。
+    ]]></description>
+
+    <change-notes><![CDATA[
+        v1.0：首个发布版。
+        配合 hotspot-agent（-javaagent）监控 HTTP 请求卡点：
+        - 请求列表 + 瀑布时间线（SQL / 下游 HTTP 耗时分布）
+        - 方法级调用树（可折叠、高频小调用折叠、不可归因自身耗时提示）
+        - 慢 SQL / 慢下游 HTTP / 端点统计 / 无主调用（后台线程 SQL）
+    ]]></change-notes>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <idea-version since-build="262"/>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <toolWindow
+                id="Hotspot Monitor"
+                anchor="right"
+                icon="/com/hotspot/plugin/icons/logo.svg"
+                factoryClass="com.codeya.hotspot.monitor.plugin.ui.HotspotToolWindowFactory"/>
+    </extensions>
+</idea-plugin>
