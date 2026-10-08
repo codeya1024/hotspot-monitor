@@ -24,7 +24,7 @@
         <toolWindow
                 id="Hotspot Monitor"
                 anchor="right"
-                icon="/com/hotspot/plugin/icons/logo.svg"
+                icon="/com/codeya/hotspot/monitor/plugin/icons/logo.svg"
                 factoryClass="com.codeya.hotspot.monitor.plugin.ui.HotspotToolWindowFactory"/>
     </extensions>
 </idea-plugin>

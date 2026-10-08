@@ -170,16 +170,16 @@ The snapshot should contain: the request list (with SQL/HTTP child spans **and b
 
 ## Changelog
 
-- **v8.17** — Cell selection & copy: single-click selects one cell in the five detail tables (⌘C copies it); double-click copies a cell anywhere; right-click menu: copy cell / selection / row / whole table (TSV with header).
-- **v8.16** — New downstream HTTP instrumentation: Apache HttpClient (4.x/5.x) and Spring WebClient (async Mono callback → orphan span when no request context).
-- **v8.15.1 / v8.15** — Agent dropdown ↔ port field sync; plugin version 1.0 (Marketplace-ready).
-- **v8.14.1** — All tables/tree use monospaced font for column alignment.
-- **v8.14** — Byte Buddy relocated to `com.codeya.hotspot.monitor.agent.shaded.bytebuddy`: zero classpath conflict with applications that bundle their own Byte Buddy.
-- **v8.13** — Orphan SQL/HTTP tab with caller + occurrence-time columns.
-- **v8.12.x** — Waterfall layout: timeline/tree get independent scrollbars (splitter default 30%); high-frequency small calls folded into expandable placeholders; "unattributable self time" hints; per-call average.
-- **v8.11** — Method names include parameter signatures (overload-safe); `MapperProxy.invoke` renders signatures at runtime.
-- **v8.10.x** — Framework packages excluded by default; call-stack cleanup on request end; multi-package agent args; incremental request-table refresh; zero-allocation method stack; duplicate method rows merged by fully-qualified name.
-- **v8.9.x** — SQL attached to the method tree; waterfall timeline as a copyable table; method-tree noise filtering (below `hotspot.noiseThresholdMs` default 5ms, no SQL → subtree dropped; methods with SQL are never dropped).
+- Cell selection & copy: single-click selects one cell in the five detail tables (⌘C copies it); double-click copies a cell anywhere; right-click menu: copy cell / selection / row / whole table (TSV with header).
+- New downstream HTTP instrumentation: Apache HttpClient (4.x/5.x) and Spring WebClient (async Mono callback → orphan span when no request context).
+- Agent dropdown ↔ port field sync; plugin version 1.0 (Marketplace-ready).
+- All tables/tree use monospaced font for column alignment.
+- Byte Buddy relocated to `com.codeya.hotspot.monitor.agent.shaded.bytebuddy`: zero classpath conflict with applications that bundle their own Byte Buddy.
+- Orphan SQL/HTTP tab with caller + occurrence-time columns.
+- Waterfall layout: timeline/tree get independent scrollbars (splitter default 30%); high-frequency small calls folded into expandable placeholders; "unattributable self time" hints; per-call average.
+- Method names include parameter signatures (overload-safe); `MapperProxy.invoke` renders signatures at runtime.
+- Framework packages excluded by default; call-stack cleanup on request end; multi-package agent args; incremental request-table refresh; zero-allocation method stack; duplicate method rows merged by fully-qualified name.
+- SQL attached to the method tree; waterfall timeline as a copyable table; method-tree noise filtering (below `hotspot.noiseThresholdMs` default 5ms, no SQL → subtree dropped; methods with SQL are never dropped).
 
 Full Chinese changelog: see [README.zh-CN.md](README.zh-CN.md).
 

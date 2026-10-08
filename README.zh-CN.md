@@ -278,7 +278,7 @@ curl -s localhost:28765/api/snapshot | python3 -m json.tool
 
   * 本地上报服务只监听 127.0.0.1、无鉴权：同一机器上的其他进程可读取监控数据，勿用于含敏感数据的共享主机。
 
-## v8.17（2026-09-30，表格单元格选中与复制）
+## 表格单元格选中与复制（2026-09-30）
 
 
 
@@ -290,7 +290,7 @@ curl -s localhost:28765/api/snapshot | python3 -m json.tool
 
 * 复制内容取单元格渲染后文本（与界面所见一致，含等宽格式化）。
 
-## v8.16（2026-09-30，补下游 HTTP：Apache HttpClient / Spring WebClient）
+## 补下游 HTTP：Apache HttpClient / Spring WebClient（2026-09-30）
 
 
 
@@ -312,7 +312,7 @@ curl -s localhost:28765/api/snapshot | python3 -m json.tool
 
 * demo 新增 `/apache`、`/webclient` 端点；端到端验证（JDK25 premain 挂载）：`/apache` 请求内 HTTP span 436ms ✓；`/webclient` 异步回调落孤儿池 span 640ms ✓（Reactor 线程无请求上下文 → 无主 HTTP，符合设计）。
 
-## v8.15.1（2026-09-30，下拉框切换联动端口框）
+## 下拉框切换联动端口框（2026-09-30）
 
 
 
@@ -324,7 +324,7 @@ curl -s localhost:28765/api/snapshot | python3 -m json.tool
 
 * 仅插件改动，替换 zip 解压后重启 IDEA。
 
-## v8.15（2026-09-30，插件版本号）
+## 插件版本号（2026-09-30）
 
 
 
@@ -340,7 +340,7 @@ curl -s localhost:28765/api/snapshot | python3 -m json.tool
 
 * 验证：zip 内 jar 的 plugin.xml 版本 = 1.0。
 
-## v8.14.1（2026-09-30，全部表格 / 方法树统一等宽字体）
+## 全部表格 / 方法树统一等宽字体（2026-09-30）
 
 
 
@@ -356,7 +356,7 @@ curl -s localhost:28765/api/snapshot | python3 -m json.tool
 
 * 仅插件改动，替换 zip 解压后重启 IDEA。
 
-## v8.14（2026-09-30，依赖重定位：agent 与业务 jar 零冲突）
+## 依赖重定位：agent 与业务 jar 零冲突（2026-09-30）
 
 
 
@@ -395,7 +395,7 @@ curl -s localhost:28765/api/snapshot | python3 -m json.tool
 
   demo 端到端 premain OK、SQL / 方法树 / 慢 SQL 采集正常。
 
-## v8.13（2026-09-30，后台 SQL/HTTP tab：孤儿 span 带调用来源）
+## 后台 SQL/HTTP tab：孤儿 span 带调用来源（2026-09-30）
 
 
 
@@ -423,7 +423,7 @@ curl -s localhost:28765/api/snapshot | python3 -m json.tool
 
 * 验证：agent 测试通过、打包成功；plugin mvn package 成功。
 
-## v8.12.1（2026-09-30，瀑布图布局：时间线 / 方法树各自滚动，方法栈默认上移）
+## 瀑布图布局：时间线 / 方法树各自滚动，方法栈默认上移（2026-09-30）
 
 
 
@@ -443,7 +443,7 @@ curl -s localhost:28765/api/snapshot | python3 -m json.tool
 
 * 仅插件改动，替换 zip 解压后**重启 IDEA** 生效（agent 与用户服务无需动）。
 
-## v8.12（2026-09-30，高频小调用折叠 + 不可归因自身耗时提示）
+## 高频小调用折叠 + 不可归因自身耗时提示（2026-09-30）
 
 
 
@@ -486,7 +486,7 @@ curl -s localhost:28765/api/snapshot | python3 -m json.tool
 
 * **注意**：agent 有改动，需替换 jar 并**重启服务**；插件需替换并重启 IDEA。
 
-## v8.11（2026-09-30，方法名带参数签名）
+## 方法名带参数签名（2026-09-30）
 
 
 
@@ -523,7 +523,7 @@ curl -s localhost:28765/api/snapshot | python3 -m json.tool
 
   双参 `two(int,java.lang.String)`；demo 端到端 `sql()`/`downstream()` 签名正确。
 
-## v8.10.1（2026-09-30）
+## 方法树同名方法修复（2026-09-30）
 
 
 
@@ -535,7 +535,7 @@ curl -s localhost:28765/api/snapshot | python3 -m json.tool
 
   用真实递归结构（setChild 六层）验证：1456 次合并为 1 行。
 
-## v8.10（2026-09-30，代码走查修复）
+## 代码走查修复（2026-09-30）
 
 
 
@@ -571,7 +571,7 @@ curl -s localhost:28765/api/snapshot | python3 -m json.tool
 
   用真实 demo（Spring Boot 3 / H2）端到端验证：方法树 0 框架节点、SQL 仍正确挂载到业务方法。
 
-## v8.9.1（2026-09-30）
+## “方法”tab 为空修复（2026-09-30）
 
 
 
@@ -583,7 +583,7 @@ curl -s localhost:28765/api/snapshot | python3 -m json.tool
 
   树默认展开 3 层；用真实快照复现验证：SQL 表格 + 方法树 + 树内 SQL 子节点均正常显示。
 
-## v8.9（2026-09-30）
+## 初始基线版本（2026-09-30）
 
 
 
@@ -601,7 +601,7 @@ curl -s localhost:28765/api/snapshot | python3 -m json.tool
 
 * 回归验证：agent 全量 19/19 通过（新增 SQL 挂载 + 根节点总耗时用例）。
 
-## v8.8（2026-09-30）
+## 方法树噪音过滤（2026-09-30）
 
 
 
@@ -621,7 +621,7 @@ curl -s localhost:28765/api/snapshot | python3 -m json.tool
 
 * 回归验证：全量 17/17 通过（新增 5 个噪音过滤用例）。
 
-## v8.7（2026-09-30）
+## JDBC 匹配器异常安全化（2026-09-30）
 
 
 
